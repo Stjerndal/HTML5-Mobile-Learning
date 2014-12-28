@@ -1,30 +1,39 @@
-(function(){
-	var app = angular.module('store', []);
+(function() {
+  var app = angular.module('gemStore', []);
 
-	app.controller('StoreController', function() {
-		this.products = gems;
-	});
+  app.controller('StoreController', function(){
+    this.products = gems;
+  });
 
-	app.controller('GalleryController', function(){
-    	this.current = 0;
-   		this.setCurrent = function(newGallery){
-	    	this.current = newGallery || 0;
-	    };
-	});
+  app.controller('TabController', function(){
+    this.tab = 1;
 
-	app.controller("PanelController", function() {
-		this.tab  = 1;
+    this.setTab = function(newValue){
+      this.tab = newValue;
+    };
 
-		this.selectTab = function(setTab) {
-			this.tab = setTab;
-		};
+    this.isSet = function(tabName){
+      return this.tab === tabName;
+    };
+  });
 
-		this.isSelected = function(checkTab) {
-			return this.tab === checkTab; 
-		};
-	});
+  app.controller('GalleryController', function(){
+    this.current = 0;
+    this.setCurrent = function(newGallery){
+      this.current = newGallery || 0;
+    };
+  });
 
-	var gems = [{
+  app.controller('ReviewController', function() {
+  	this.review = {};
+
+  	this.addReview = function(product) {
+  		product.reviews.push(this.review);
+  		this.review = {};
+  	};
+  })
+
+  var gems = [{
       name: 'Azurite',
       description: "Some gems have hidden qualities beyond their luster, beyond their shine... Azurite is one of those gems.",
       shine: 8,
@@ -102,5 +111,4 @@
         createdOn: 1397490980837
       }]
     }];
-
 })();
